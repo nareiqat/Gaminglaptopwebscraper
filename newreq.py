@@ -25,7 +25,7 @@ filename = "products.csv"
  
 f = open(filename, "w")
  
-headers = "product_brand, product_name, product_shipping\n"
+headers = "product_brand, product_name,product_price, product_shipping\n"
  
 f.write(headers)
  
@@ -47,12 +47,16 @@ for container in containers:
     shipping_container = container.findAll("li", {"class": "price-ship"})
  
     product_shipping = shipping_container[0].text.strip()
+
+    price_container  = container.findAll("li", {"class":"price-current"})
  
+    price = price_container[0].text.strip()
+
     # print("product_brand: " + product_brand)
     # print("product_name: " + product_name)
     # print("product_shipping: " + product_shipping)
  
     # replace "," in product name with "|"
-    f.write(product_name.replace(",", "|") + "," + product_brand + "," + product_shipping + "\n")
-    
+    f.write(product_name.replace(",", "|") + "," + product_brand + "," + price + ","+ product_shipping + "\n")
+     
 f.close()
